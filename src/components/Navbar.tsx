@@ -2,39 +2,113 @@ import { useState } from "react";
 import { Link } from "react-router";
 
 export const Navbar = () => {
-    const [menuOpen,setMenuOpen] = useState(false);
-    return  (
-        <nav>
-            <div>
-                <div>
-                    <Link to={"/"}>
-                    social<span>.media</span>
+    const [menuOpen, setMenuOpen] = useState(false);
+    return (
+        <nav className="fixed top-0 w-full z-40 bg-[rgba(50,20,90,0.9)] backdrop-blur-lg border-b border-purple-300/10 shadow-lg">
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="flex justify-between items-center h-20">
+                    <Link to="/" className="font-mono text-2xl font-bold text-white flex items-center">
+                        <span className="mr-1">Chat</span>
+                        <span className="text-purple-400">(Now)</span>
                     </Link>
-                    {/*Desktop Links */}
-                    <div>
-                        <Link to ={"/"}> Inicio </Link>
-                        <Link to ={"/create"}> Crear Publicaciones </Link>
-                        <Link to ={"/communities"}> Comunidades </Link>
-                        <Link to ={"/community/create"}> Crear Comunidades</Link>
-                    </div>
 
-                    {/*Mobile Menu  Button*/}
-                    <div>
-                        {""}
-                        <button></button>
-                    </div>
-                    {menuOpen && (
-                    <div>
-                        <div>
-                            <Link to ={"/"}> Inicio </Link>
-                            <Link to ={"/create"}> Crear Publicaciones </Link>
-                            <Link to ={"/communities"}> Comunidades </Link>
-                            <Link to ={"/community/create"}> Crear Comunidades</Link>
+                    {/* Desktop Links */}
+                    <div className="hidden md:flex items-center">
+                        <div className="bg-purple-900/60 rounded-full px-6 py-2 flex space-x-6">
+                            <Link
+                                to="/"
+                                className="text-purple-100 hover:text-white transition-colors font-medium"
+                            >
+                                Inicio
+                            </Link>
+                            <Link
+                                to="/create"
+                                className="text-purple-100 hover:text-white transition-colors font-medium"
+                            >
+                                Crear Publicacion
+                            </Link>
+                            <Link
+                                to="/communities"
+                                className="text-purple-100 hover:text-white transition-colors font-medium"
+                            >
+                                Comunidades
+                            </Link>
+                            <Link
+                                to="/community/create"
+                                className="text-purple-100 hover:text-white transition-colors font-medium"
+                            >
+                                Crear Comunidad
+                            </Link>
                         </div>
                     </div>
-                    )}
+
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden">
+                        <button
+                            onClick={() => setMenuOpen((prev) => !prev)}
+                            className="text-purple-100 hover:text-white focus:outline-none bg-purple-900/60 p-2 rounded-full"
+                            aria-label="Toggle menu"
+                        >
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                {menuOpen ? (
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                ) : (
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
+            {/* Desktop auth */}
+
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className="md:hidden bg-[rgba(10,10,10,0.9)] rounded-b-lg mx-4 mb-2 overflow-hidden shadow-lg">
+                    <div className="px-4 py-3 space-y-2">
+                        <Link
+                            to="/"
+                            className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
+                        >
+                            Inicio
+                        </Link>
+                        <Link
+                            to="/create"
+                            className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
+                        >
+                            Crear Publicacion
+                        </Link>
+                        <Link
+                            to="/communities"
+                            className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
+                        >
+                            Comunidades
+                        </Link>
+                        <Link
+                            to="/community/create"
+                            className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
+                        >
+                            Crear Comunidad
+                        </Link>
+                    </div>
+                </div>
+            )}
         </nav>
     );
-}
+};
