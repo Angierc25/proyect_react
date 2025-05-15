@@ -26,19 +26,19 @@ export const Navbar = () => {
                                 Inicio
                             </Link>
                             <Link
-                                to="/create"
+                                to="/crear"
                                 className="text-purple-100 hover:text-white transition-colors font-medium"
                             >
                                 Crear Publicacion
                             </Link>
                             <Link
-                                to="/communities"
+                                to="/comunidades"
                                 className="text-purple-100 hover:text-white transition-colors font-medium"
                             >
                                 Comunidades
                             </Link>
                             <Link
-                                to="/community/create"
+                                to="/comunidad/crear"
                                 className="text-purple-100 hover:text-white transition-colors font-medium"
                             >
                                 Crear Comunidad
@@ -122,19 +122,19 @@ export const Navbar = () => {
                             Inicio
                         </Link>
                         <Link
-                            to="/create"
+                            to="/crear"
                             className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
                         >
                             Crear Publicacion
                         </Link>
                         <Link
-                            to="/communities"
+                            to="/comunidades"
                             className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
                         >
                             Comunidades
                         </Link>
                         <Link
-                            to="/community/create"
+                            to="/comunidad/crear"
                             className="block px-3 py-2 rounded-full text-base font-medium text-gray-300 hover:text-white hover:bg-black/40"
                         >
                             Crear Comunidad
