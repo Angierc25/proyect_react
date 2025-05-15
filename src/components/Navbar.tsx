@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { signInWithGitHub, singOut, user } = useAuth();
+
+    const displayName = user?.user_metadata.user_name || user?.email;
     return (
         <nav className="fixed top-0 w-full z-40 bg-[rgba(50,20,90,0.9)] backdrop-blur-lg border-b border-purple-300/10 shadow-lg">
             <div className="max-w-6xl mx-auto px-6">
@@ -41,6 +45,34 @@ export const Navbar = () => {
                             </Link>
                         </div>
                     </div>
+                    {/* Desktop auth */}
+                    <div className="hidden md:flex items-center">
+                        {user ? (
+                            <div className="flex items-center space-x-4">
+                                {user.user_metadata?.avatar_url && (
+                                    <img
+                                        src={user.user_metadata.avatar_url}
+                                        alt="User Avatar"
+                                        className="w-8 h-8 rounded-full object-cover"
+                                    />
+                                )}
+                                <span className="text-gray-300">{displayName}</span>
+                                <button
+                                    onClick={singOut}
+                                    className="bg-red-500 px-3 py-1 rounded"
+                                >
+                                    Cerrar sesion
+                                </button>
+                            </div>
+                        ) : (
+                            <button
+                                onClick={signInWithGitHub}
+                                className="bg-blue-500 px-3 py-1 rounded"
+                            >
+                                Iniciar sesion con GitHub
+                            </button>
+                        )}
+                    </div>
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden">
@@ -76,7 +108,8 @@ export const Navbar = () => {
                     </div>
                 </div>
             </div>
-            {/* Desktop auth */}
+
+
 
             {/* Mobile Menu */}
             {menuOpen && (
