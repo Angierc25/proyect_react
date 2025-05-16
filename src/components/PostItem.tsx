@@ -10,7 +10,7 @@ export const PostItem = ({ post }: Props) => {
         <div className="group relative">
             {/* Hover gradient effect */}
             <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 opacity-0 blur transition duration-300 group-hover:opacity-70"></div>
-            <Link to="/publicaciones" className="relative block z-10">
+            <Link to={`/publicacion/${post.id}` }className="relative block z-10">
                 <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 p-4 text-white shadow-lg transition duration-300 group-hover:bg-gray-800">
                     {/* Header: Avatar and Title */}
                     <div className="mb-3 flex items-center gap-3">
