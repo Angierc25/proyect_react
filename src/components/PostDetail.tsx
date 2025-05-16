@@ -23,15 +23,14 @@ const fetchPostById = async (id:number): Promise<Post> =>{
         queryFn:() => fetchPostById(postId),
     });
 
-    if(isLoading)<div>Cargando Contenido</div>;
+    if(isLoading){
+     return <div>Cargando Contenido</div>;
+    }
 
     if(error){
         return <div>Error:{error.message}</div>
     }
-      if (!data) { 
-    return <div>No se encontró el post</div>;
-  }
-
+      
      return( 
      <div className="pt-10 max-w-3xl mx-auto px-4">
       <h2 className="text-3xl font-bold text-purple-600 mb-4">{data?.title}</h2>
@@ -42,7 +41,7 @@ const fetchPostById = async (id:number): Promise<Post> =>{
       />
       <p className="text-white-700 leading-relaxed mb-4">{data?.content}</p>
       <p className="text-sm text-gray-500 italic">
-        Posted on: {new Date(data.created_at).toLocaleDateString()}
+        Posted on: {new Date(data!.created_at).toLocaleDateString()}
       </p>
     </div>
      );
