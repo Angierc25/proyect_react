@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home /> } />
           <Route path="/crear" element={<CreatePostPage /> } />
-          <Route path="/publicacion/:id" element={<PostPage /> } />
+          <Route path="/post/:id" element={<PostPage /> } />
         </Routes>
       </div>
     </div>
