@@ -7,19 +7,26 @@ interface Props {
 }
 export const PostItem = ({ post }: Props) => {
     return (
-        <div className="group relative">
-            {/* Hover gradient effect */}
-            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 opacity-0 blur transition duration-300 group-hover:opacity-70"></div>
-            <Link to={`/publicacion/${post.id}` }className="relative block z-10">
-                <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 p-4 text-white shadow-lg transition duration-300 group-hover:bg-gray-800">
+        <div className="relative group">
+            <div className="absolute -inset-1 rounded-[20px] bg-gradient-to-r from-pink-600 to-purple-600 blur-sm opacity-0 group-hover:opacity-50 transition duration-300 pointer-events-none"></div>
+            <Link to={`/post/${post.id}`} className="block relative z-10">
+                <div className="w-80 h-76 bg-[rgb(24,27,32)] border border-[rgb(84,90,106)] rounded-[20px] text-white flex flex-col p-5 overflow-hidden transition-colors duration-300 group-hover:bg-gray-800">
                     {/* Header: Avatar and Title */}
-                    <div className="mb-3 flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-600 to-indigo-800 flex items-center justify-center">
-                            <span className="text-xs font-bold text-white opacity-80">
-                                {post.title.substring(0, 2).toUpperCase()}
-                            </span>
+                    <div className="flex items-center space-x-2">
+                        {post.avatar_url ? (
+                            <img
+                                src={post.avatar_url}
+                                alt="User Avatar"
+                                className="w-[35px] h-[35px] rounded-full object-cover"
+                            />
+                        ) : (
+                            <div className="w-[35px] h-[35px] rounded-full bg-gradient-to-tl from-[#8A2BE2] to-[#491F70]" />
+                        )}
+                        <div className="flex flex-col flex-1">
+                            <div className="text-[20px] leading-[22px] font-semibold mt-2">
+                                {post.title}
+                            </div>
                         </div>
-                        <h3 className="flex-1 truncate text-lg font-bold">{post.title}</h3>
                     </div>
                     {/*Image Banner */}
                     <div className="mt-2 flex-1">
