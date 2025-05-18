@@ -36,7 +36,17 @@ export const PostItem = ({ post }: Props) => {
                             className="h-40 w-full rounded-xl object-cover"
                         />
                     </div>
+                    <div className="flex justify-around items-center">
+                    <span className="cursor-pointer h-10 w-[50px] px-1 flex items-center justify-center font-extrabold rounded-lg">
+                        ❤️ <span className="ml-2">{post.like_count ?? 0}</span>
+                    </span>
+                    <span className="cursor-pointer h-10 w-[50px] px-1 flex items-center justify-center font-extrabold rounded-lg">
+                        💬 <span className="ml-2">{post.comment_count ?? 0}</span>
+                    </span>
                 </div>
+                </div>
+
+                
             </Link>
         </div>
     )
