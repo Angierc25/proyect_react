@@ -33,8 +33,8 @@ export const CreateCommunity = () => {
     mutate({ name, description });
   };
    return (
-    
-      <div className="max-w-2xl mx-auto p-8">
+     <div className="py-1 px-3 sm:px-2 lg:px-2 min-h-screen  flex items-center justify-center">
+      <div className="max-w-2xl mx-auto">
         <div className="bg-gray-800 bg-opacity-70 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-purple-500/20">
           <h2 className="text-5xl font-bold mb-8 text-center bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Crear nueva comunidad
@@ -106,6 +106,6 @@ export const CreateCommunity = () => {
           </form>
         </div>
       </div>
-    
+    </div>
   );
 };
