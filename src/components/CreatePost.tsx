@@ -1,13 +1,15 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState, type ChangeEvent } from "react";
 import { supabase } from "../supabase-client";
 import { useAuth } from "../context/AuthContext";
+import { fetchCommunities, type Community } from "./CommunityList";
 
 
 interface PostInput {
     title: string;
     content: string;
     avatar_url: string | null;
+    community_id?:number | null;
 }
 
 const createPost = async (post: PostInput, imageFile: File) => {
@@ -32,11 +34,18 @@ const createPost = async (post: PostInput, imageFile: File) => {
 export const CreatePost = () => {
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
+    const [communityId, setCommunityId] = useState<number | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-    const{user} = useAuth()
+    const { user } = useAuth()
 
-    const { mutate,isPending,isError } = useMutation({
+    const { data: communities } = useQuery<Community[], Error>({
+        queryKey: ["communities"],
+        queryFn: fetchCommunities,
+    });
+
+
+    const { mutate, isPending, isError } = useMutation({
         mutationFn: (data: { post: PostInput, imageFile: File }) => {
             return createPost(data.post, data.imageFile);
         }
@@ -45,14 +54,21 @@ export const CreatePost = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (!selectedFile) return;
-        mutate({ post: { 
-            title,
-            content,
-            avatar_url:user?.user_metadata.avatar_url || null
-         }, 
-         imageFile: selectedFile
-         });
+        mutate({
+            post: {
+                title,
+                content,
+                avatar_url: user?.user_metadata.avatar_url || null,
+                community_id:communityId,
+            },
+            imageFile: selectedFile
+        });
 
+    };
+
+    const handleCommunityChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        setCommunityId(value ? Number(value) : null);
     };
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +107,19 @@ export const CreatePost = () => {
                 />
             </div>
 
+
+            <div>
+                <label> Selecciona la  Comunidad</label>
+                <select id="community" onChange={handleCommunityChange}>
+                    <option value={""}> -- Escoge una comunidad  -- </option>
+                    {communities?.map((community, key) => (
+                        <option key={key} value={community.id}>
+                            {community.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
             <div>
                 <label htmlFor="image" className="block mb-2 font-medium text-gray-200 text-sm tracking-wide">
                     Subir Imagen
@@ -119,7 +148,7 @@ export const CreatePost = () => {
                 type="submit"
                 className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium py-3 px-6 rounded-md hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition duration-300 transform hover:-translate-y-1 shadow-lg"
             >
-               {isPending ? "Creando..." : "Crear Publicación"}
+                {isPending ? "Creando..." : "Crear Publicación"}
             </button>
             {isError && <p>Error al crear el post</p>}
         </form>
