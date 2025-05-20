@@ -5,6 +5,7 @@ import { CreatePostPage } from './pages/CreatePostPage';
 import { PostPage } from './pages/PostPage';
 import { CreateCommunity } from './components/CreateCommunity';
 import { CommunitiesPage } from './pages/CommunitiesPage';
+import { CommunityPage } from './pages/CommunityPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/post/:id" element={<PostPage /> } />
           <Route path="/comunidad/crear" element={<CreateCommunity /> } />
           <Route path="/comunidades" element={<CommunitiesPage /> } />
+          <Route path="/comunidad/:id" element={<CommunityPage /> } />
         </Routes>
       </div>
     </div>
